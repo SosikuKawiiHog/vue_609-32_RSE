@@ -40,8 +40,23 @@ onMounted(async () => {
                     </div>
                     <ul class="flex gap-10">
                         <li>
-                            <a
-                                href=""
+                            <RouterLink
+                                :to="{name: 'catalog'}"
+                                class="flex gap-3 items-center"
+                            >
+                                <span class="p-3.5 rounded-x1 bg-slate-100 hover:bg-slate-200 transition"
+                                >
+                                    <img
+                                        src="/catalog-icon.svg"
+                                        alt=""
+                                    />
+                                </span>
+                                Каталог
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink
+                                :to="{name: 'cart'}"
                                 class="flex gap-3 items-center"
                             >
                                 <span class="p-3.5 rounded-x1 bg-slate-100 hover:bg-slate-200 transition"
@@ -52,10 +67,11 @@ onMounted(async () => {
                                         />
                                 </span>
                                 Корзина
-                            </a>
+                            </RouterLink>
                         </li>
                         <li>
-                            <a
+                            <RouterLink
+                                :to="{name: 'favorites'}"
                                 href=""
                                 class="flex gap-3 items-center"
                             >
@@ -67,11 +83,11 @@ onMounted(async () => {
                                     />
                                 </span>
                                 Избранное
-                            </a>
+                            </RouterLink>
                         </li>
                         <li>
-                            <a
-                                href=""
+                            <RouterLink
+                                :to="{name: 'orders'}"
                                 class="flex gap-3 items-center"
                             >
                                 <span class="p-3.5 rounded-x1 bg-slate-100 hover:bg-slate-200 transition"
@@ -82,12 +98,12 @@ onMounted(async () => {
                                     />
                                 </span>
                                 Заказы
-                            </a>
+                            </RouterLink>
                         </li>
                     </ul>
                 </div>
             </nav>
-            <v-catalog/>
+            <RouterView/>
         </div>
         <footer class="p-6 bg-slate-100">
             <div class="text-center text-slate-500">
