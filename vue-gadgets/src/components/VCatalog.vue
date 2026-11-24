@@ -1,9 +1,9 @@
 <script setup>
-import VProduct from "@/components/VProduct.vue";
+import VProduct from "@/components/cards/VProduct.vue";
 import {onMounted, ref, computed, watch} from "vue";
 import axios from "axios";
-import SearchInput from "@/components/SearchInput.vue";
-import SortSelect from "@/components/SortSelect.vue";
+import SearchInput from "@/components/form/SearchInput.vue";
+import SortSelect from "@/components/form/SortSelect.vue";
 
 const items = ref([])
 const fetchItems = async () => {
