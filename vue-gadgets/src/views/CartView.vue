@@ -89,12 +89,9 @@ const handleOrderClick = () => {
             <div class="p-5 bg-slate-100 rounded-4xl flex flex-col gap-3 flex-1">
                 <h2 class="text-lg font-bold text-slate-800">Способ получения</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <!-- Вариант 1: Самовывоз -->
                     <radio-card labelText="Самовывоз из магазина" description="Бесплатно, сегодня" v-model="deliveryMethod" value="pickup" />
-                    <!-- Вариант 2: Доставка курьером -->
                     <radio-card labelText="Доставка курьером" description="По указанному адресу" v-model="deliveryMethod" value="courier" />
                 </div>
-                <!-- Поля адреса (отображаются только при выборе курьера) -->
                 <div v-if="deliveryMethod === 'courier'" class="space-y-4 border-t border-slate-100">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <v-input labelText="Город *" placeholder="Например, Сургут" v-model="address.city" />
