@@ -76,40 +76,56 @@ const handleOrderClick = () => {
 </script>
 
 <template>
-    <main class="pt-10">
-        <h1 class="text-[40px] font-bold mb-5">Корзина</h1>
+    <main class="pt-6 sm:pt-10">
+        <h1 class="text-3xl sm:text-[40px] font-bold mb-5">Корзина</h1>
+
         <div v-if="cartStore.items.length === 0" class="flex flex-col gap-5">
             <p>Корзина пуста 📦</p>
-            <RouterLink to="/" class="underline">Перейти к покупкам</RouterLink>
+            <RouterLink :to="{ name: 'catalog' }" class="underline">Перейти к покупкам</RouterLink>
         </div>
-        <div v-else class="flex gap-5 items-start">
-            <div class="flex flex-2 flex-col gap-5">
-                <cart-product v-for="item in cartStore.items" :key="item.id" :product="item"></cart-product>
+
+        <div v-else class="flex flex-col lg:flex-row gap-5 items-start">
+            <div class="flex flex-col gap-5 w-full lg:flex-[2]">
+                <cart-product
+                    v-for="item in cartStore.items"
+                    :key="item.id"
+                    :product="item"
+                />
             </div>
-            <div class="p-5 bg-slate-100 rounded-4xl flex flex-col gap-3 flex-1">
+
+            <div class="p-4 sm:p-5 bg-slate-100 rounded-2xl sm:rounded-4xl flex flex-col gap-4 w-full lg:flex-1">
                 <h2 class="text-lg font-bold text-slate-800">Способ получения</h2>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <radio-card labelText="Самовывоз из магазина" description="Бесплатно, сегодня" v-model="deliveryMethod" value="pickup" />
-                    <radio-card labelText="Доставка курьером" description="По указанному адресу" v-model="deliveryMethod" value="courier" />
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <radio-card labelText="Самовывоз" description="Бесплатно, сегодня" v-model="deliveryMethod" value="pickup" />
+                    <radio-card labelText="Курьером" description="По адресу" v-model="deliveryMethod" value="courier" />
                 </div>
-                <div v-if="deliveryMethod === 'courier'" class="space-y-4 border-t border-slate-100">
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                <div v-if="deliveryMethod === 'courier'" class="space-y-4 border-t border-slate-200 pt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <v-input labelText="Город *" placeholder="Например, Сургут" v-model="address.city" />
                         <v-input labelText="Улица и дом *" placeholder="ул. Ленина, д. 10" v-model="address.street" />
                     </div>
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <v-input labelText="Квартира / Офис" placeholder="кв. 42" v-model="address.apartment" />
-                        <v-input labelText="Комментарий курьеру" placeholder="Код домофона, подъезд" v-model="address.comment" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <v-input labelText="Квартира" placeholder="кв. 42" v-model="address.apartment" />
+                        <v-input labelText="Комментарий" placeholder="Код домофона" v-model="address.comment" />
                     </div>
                 </div>
-                <p v-if="validationError" class="mb-2 text-xs text-red-600">{{ validationError }}</p>
-                <button @click="handleOrderClick" :disabled="isSubmitting" class="p-4 bg-red-500 rounded-2xl text-white font-medium cursor-pointer hover:bg-red-400 disabled:bg-red-200 transition">
+
+                <p v-if="validationError" class="text-xs text-red-600">{{ validationError }}</p>
+
+                <button
+                    @click="handleOrderClick"
+                    :disabled="isSubmitting"
+                    class="p-4 bg-red-500 rounded-2xl text-white font-medium cursor-pointer hover:bg-red-400 disabled:bg-red-200 transition"
+                >
                     {{ isSubmitting ? "Оформление..." : "Оформить заказ" }}
                 </button>
-                <div class="flex justify-between items-end">
+
+                <div class="flex justify-between items-end pt-2">
                     <div>
                         <h4 class="text-md font-bold">Итого:</h4>
-                        <p>Товаров ({{ cartStore.totalItems }})</p>
+                        <p class="text-sm text-slate-600">Товаров ({{ cartStore.totalItems }})</p>
                     </div>
                     <b class="text-xl">{{ cartStore.totalPrice.toLocaleString("ru-RU") }} ₽</b>
                 </div>

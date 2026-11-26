@@ -9,33 +9,27 @@ defineProps({
 });
 </script>
 <template>
-    <div
-        class="p-5 bg-slate-100 rounded-xl flex flex-col justify-between gap-2"
-    >
+    <div class="p-3 sm:p-5 bg-slate-100 rounded-xl flex flex-col justify-between gap-2">
         <div>
             <img
                 :src="product.imageUrl"
                 alt=""
-                class="mb-4"
+                class="mb-3 sm:mb-4 w-full h-40 sm:h-48 object-cover rounded-lg"
             />
-            <h3 class="text-xl font-semibold">
+            <h3 class="text-base sm:text-xl font-semibold line-clamp-2">
                 {{ product.title }}
             </h3>
         </div>
-        <div class="flex items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center justify-between gap-2 mt-2">
             <div>
-                <p class="text-slate-500">Цена</p>
-                <b class="text-xl">{{ product.price.toLocaleString("ru-RU") }} ₽</b>
+                <p class="text-xs sm:text-sm text-slate-500">Цена</p>
+                <b class="text-lg sm:text-xl">{{ product.price.toLocaleString("ru-RU") }} ₽</b>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 <button
                     @click="favoritesStore.toggleFavorite(product)"
-                    class="rounded-xl shadow p-3 cursor-pointer hover:scale-110 transition"
-                    :class="[
-                        favoritesStore.isFavorite(product.id)
-                          ? 'bg-red-500'
-                          : 'bg-white',
-                      ]"
+                    class="rounded-xl shadow p-2 sm:p-3 cursor-pointer hover:scale-110 transition"
+                    :class="[favoritesStore.isFavorite(product.id) ? 'bg-red-500' : 'bg-white']"
                 >
                     <svg
                         width="20"
@@ -55,17 +49,9 @@ defineProps({
                     </svg>
                 </button>
                 <button
-                    @click="
-                        cartStore.isAdded(product.id)
-                          ? cartStore.removeFromCart(product.id)
-                          : cartStore.addToCart(product)
-                      "
-                    class="rounded-xl shadow p-3 cursor-pointer hover:scale-110 transition"
-                    :class="[
-                        cartStore.isAdded(product.id)
-                          ? 'bg-red-500'
-                          : 'bg-white',
-                      ]"
+                    @click="cartStore.isAdded(product.id) ? cartStore.removeFromCart(product.id) : cartStore.addToCart(product)"
+                    class="rounded-xl shadow p-2 sm:p-3 cursor-pointer hover:scale-110 transition"
+                    :class="[cartStore.isAdded(product.id) ? 'bg-red-500' : 'bg-white']"
                 >
                     <svg
                         width="20"

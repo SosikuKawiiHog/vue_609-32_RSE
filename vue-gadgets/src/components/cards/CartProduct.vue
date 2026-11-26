@@ -9,31 +9,15 @@ defineProps({
 });
 </script>
 <template>
-    <div
-        class="p-5 bg-slate-100 rounded-4xl flex items-start justify-between gap-10"
-    >
-        <div class="flex gap-4 flex-1">
-            <div class="w-30 h-30 overflow-hidden">
-                <img
-                    :src="product.imageUrl"
-                    alt=""
-                    class="w-full h-full object-cover"
-                />
+    <div class="p-3 sm:p-5 bg-slate-100 rounded-2xl sm:rounded-4xl flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-10">
+        <div class="flex gap-3 sm:gap-4 flex-1">
+            <div class="w-20 h-20 sm:w-30 sm:h-30 overflow-hidden shrink-0">
+                <img :src="product.imageUrl" alt="" class="w-full h-full object-cover rounded-lg" />
             </div>
-            <div class="pt-2">
-                <h3 class="text-xl font-semibold mb-3">
-                    {{ product.title }}
-                </h3>
-                <div class="flex gap-3 items-center">
-                    <button
-                        @click="favoritesStore.toggleFavorite(product)"
-                        class="rounded-4xl shadow p-3 cursor-pointer hover:scale-110 transition"
-                        :class="[
-                          favoritesStore.isFavorite(product.id)
-                            ? 'bg-red-500'
-                            : 'bg-white',
-                        ]"
-                    >
+            <div class="pt-1">
+                <h3 class="text-sm sm:text-xl font-semibold mb-2 line-clamp-2">{{ product.title }}</h3>
+                <div class="flex gap-2 sm:gap-3 items-center">
+                    <button @click="favoritesStore.toggleFavorite(product)" class="rounded-full shadow p-2 sm:p-3 cursor-pointer hover:scale-110 transition" :class="[favoritesStore.isFavorite(product.id) ? 'bg-red-500' : 'bg-white']">
                         <svg
                             width="20"
                             height="20"
@@ -51,10 +35,7 @@ defineProps({
                             />
                         </svg>
                     </button>
-                    <button
-                        @click="cartStore.removeFromCart(product.id)"
-                        class="rounded-4xl bg-white shadow p-3 cursor-pointer hover:scale-110 transition"
-                    >
+                    <button @click="cartStore.removeFromCart(product.id)" class="rounded-full bg-white shadow p-2 sm:p-3 cursor-pointer hover:scale-110 transition">
                         <svg
                             width="20"
                             height="20"
@@ -74,23 +55,14 @@ defineProps({
                 </div>
             </div>
         </div>
-        <div class="pt-2">
-            <b class="text-xl">{{ product.price.toLocaleString("ru-RU") }} ₽</b>
-        </div>
-        <div class="rounded-4xl bg-white p-1 flex items-center">
-            <button
-                class="cursor-pointer w-10 h-10 font-bold flex items-center justify-center rounded-4xl p-3 hover:bg-slate-200 transition"
-                @click="cartStore.updateQuantity(product.id, -1)"
-            >
-                -
-            </button>
-            <span class="w-12 text-center">{{ product.quantity }}</span>
-            <button
-                class="cursor-pointer w-10 h-10 font-bold flex items-center justify-center rounded-4xl p-3 hover:bg-slate-200 transition"
-                @click="cartStore.updateQuantity(product.id, 1)"
-            >
-                +
-            </button>
+
+        <div class="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto mt-2 md:mt-0">
+            <div class="text-lg sm:text-xl font-bold">{{ product.price.toLocaleString("ru-RU") }} ₽</div>
+            <div class="rounded-xl bg-white p-1 flex items-center">
+                <button class="cursor-pointer w-8 h-8 sm:w-10 sm:h-10 font-bold flex items-center justify-center rounded-lg hover:bg-slate-200 transition" @click="cartStore.updateQuantity(product.id, -1)">-</button>
+                <span class="w-8 sm:w-12 text-center text-sm sm:text-base">{{ product.quantity }}</span>
+                <button class="cursor-pointer w-8 h-8 sm:w-10 sm:h-10 font-bold flex items-center justify-center rounded-lg hover:bg-slate-200 transition" @click="cartStore.updateQuantity(product.id, 1)">+</button>
+            </div>
         </div>
     </div>
 </template>

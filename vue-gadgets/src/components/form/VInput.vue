@@ -30,7 +30,7 @@ const model = defineModel({ required: true });
                 v-model="model"
                 :type="type"
                 :placeholder="placeholder"
-                class="mt-1.5 w-full rounded-xl border border-slate-300 px-4 py-2.5 text-slate-800 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
+                class="mt-1.5 w-full rounded-xl border border-slate-300 px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base text-slate-800 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
                 :required="required"
                 v-bind="$attrs"
             />
